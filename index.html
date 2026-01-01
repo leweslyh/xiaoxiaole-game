@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消消乐游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 主菜单 -->
+    <div id="main-menu" class="main-menu">
+        <div class="menu-content">
+            <h1 class="game-title">消消乐</h1>
+            <div class="mode-sections">
+                <div class="mode-section">
+                    <h2 class="section-title">经典模式</h2>
+                    <div class="mode-buttons">
+                        <button id="classic-mode" class="menu-btn mode-btn">经典模式</button>
+                        <button id="time-mode" class="menu-btn mode-btn">限时模式</button>
+                        <button id="endless-mode" class="menu-btn mode-btn">无尽模式</button>
+                    </div>
+                </div>
+                <div class="mode-section">
+                    <h2 class="section-title">创意模式</h2>
+                    <div class="mode-buttons">
+                        <button id="puzzle-mode" class="menu-btn mode-btn">解谜模式</button>
+                        <button id="chain-storm-mode" class="menu-btn mode-btn">连锁风暴</button>
+                        <button id="special-challenge-mode" class="menu-btn mode-btn">特殊方块挑战</button>
+                        <button id="gravity-flip-mode" class="menu-btn mode-btn">重力反转</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-actions">
+                <button id="help-btn" class="menu-btn action-btn">游戏帮助</button>
+                <button id="settings-btn" class="menu-btn action-btn">设置</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 帮助菜单 -->
+    <div id="help-menu" class="help-menu hidden">
+        <div class="help-content">
+            <h2>游戏帮助</h2>
+            <div class="help-tabs">
+                <button class="help-tab active" data-tab="basics">基础玩法</button>
+                <button class="help-tab" data-tab="advanced">进阶技巧</button>
+                <button class="help-tab" data-tab="special">特殊方块</button>
+                <button class="help-tab" data-tab="modes">游戏模式</button>
+            </div>
+            <div class="help-panels">
+                <!-- 基础玩法 -->
+                <div class="help-panel active" id="basics">
+                    <h3>基础玩法</h3>
+                    <ul>
+                        <li>点击相邻的两个方块进行交换</li>
+                        <li>形成3个或以上同色方块即可消除</li>
+                        <li>消除方块获得分数</li>
+                        <li>达到目标分数即可升级</li>
+                        <li>使用提示功能获得游戏建议</li>
+                    </ul>
+                    <h4>操作说明</h4>
+                    <ul>
+                        <li>点击第一个方块进行选择</li>
+                        <li>点击相邻的方块进行交换</li>
+                        <li>如果交换后形成匹配，方块将被消除</li>
+                        <li>如果交换后没有形成匹配，方块将自动交换回原位</li>
+                    </ul>
+                </div>
+                
+                <!-- 进阶技巧 -->
+                <div class="help-panel" id="advanced">
+                    <h3>进阶技巧</h3>
+                    <ul>
+                        <li>优先消除多个方向的匹配，形成连锁反应</li>
+                        <li>注意观察即将下落的方块，提前规划</li>
+                        <li>合理使用提示功能，但不要过度依赖</li>
+                        <li>在经典模式下，注意控制移动次数</li>
+                        <li>在限时模式下，快速消除方块以获取更多时间</li>
+                    </ul>
+                    <h4>高分策略</h4>
+                    <ul>
+                        <li>尽可能形成4个或5个同色方块，生成特殊方块</li>
+                        <li>组合使用不同类型的特殊方块</li>
+                        <li>保持持续的消除，获得连击分数</li>
+                        <li>优先消除上层的方块，让下层方块有更多机会形成匹配</li>
+                    </ul>
+                </div>
+                
+                <!-- 特殊方块 -->
+                <div class="help-panel" id="special">
+                    <h3>特殊方块</h3>
+                    <div class="special-item">
+                        <div class="special-icon">↔️</div>
+                        <div class="special-desc">
+                            <h4>横消方块</h4>
+                            <p>由4个同色方块横向连成一线生成，点击后消除整行方块</p>
+                        </div>
+                    </div>
+                    <div class="special-item">
+                        <div class="special-icon">↕️</div>
+                        <div class="special-desc">
+                            <h4>竖消方块</h4>
+                            <p>由4个同色方块纵向连成一线生成，点击后消除整列方块</p>
+                        </div>
+                    </div>
+                    <div class="special-item">
+                        <div class="special-icon">💣</div>
+                        <div class="special-desc">
+                            <h4>炸弹方块</h4>
+                            <p>由5个同色方块连成一线生成，点击后消除周围8个方块以及自身</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 游戏模式 -->
+                <div class="help-panel" id="modes">
+                    <h3>游戏模式</h3>
+                    <div class="mode-item">
+                        <h4>经典模式</h4>
+                        <p>30步限制，达到目标分数升级，适合新手玩家练习</p>
+                    </div>
+                    <div class="mode-item">
+                        <h4>限时模式</h4>
+                        <p>60秒时间限制，无限步数，升级增加30秒时间，考验反应速度</p>
+                    </div>
+                    <div class="mode-item">
+                        <h4>无尽模式</h4>
+                        <p>无步数和时间限制，持续游戏挑战高分，适合休闲娱乐</p>
+                    </div>
+                    <div class="mode-item">
+                        <h4>解谜模式</h4>
+                        <p>固定布局和有限步数，通过精确的交换达成特定目标，考验策略思维</p>
+                    </div>
+                </div>
+            </div>
+            <button id="back-from-help" class="btn">返回菜单</button>
+        </div>
+    </div>
+    
+    <!-- 设置面板 -->
+    <div id="settings" class="settings hidden">
+        <div class="settings-content">
+            <h2>设置</h2>
+            <div class="setting-item">
+                <label for="sound-toggle">音效</label>
+                <input type="checkbox" id="sound-toggle" checked>
+            </div>
+            <div class="setting-item">
+                <label for="music-toggle">背景音乐</label>
+                <input type="checkbox" id="music-toggle" checked>
+            </div>
+            <div class="setting-item">
+                <label for="difficulty">游戏难度</label>
+                <select id="difficulty" class="difficulty-select">
+                    <option value="easy">简单</option>
+                    <option value="normal" selected>普通</option>
+                    <option value="hard">困难</option>
+                </select>
+            </div>
+            <button id="back-to-menu" class="btn">返回菜单</button>
+        </div>
+    </div>
+    
+    <!-- 游戏界面 -->
+    <div id="game-container" class="game-container hidden">
+        <div class="game-header">
+            <h1>消消乐</h1>
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="label">分数:</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">关卡:</span>
+                    <span id="level">1</span>
+                </div>
+                <div class="stat">
+                    <span class="label">目标分数:</span>
+                    <span id="target-score">1000</span>
+                </div>
+                <div class="stat" id="moves-stat">
+                    <span class="label">剩余步数:</span>
+                    <span id="moves">30</span>
+                </div>
+                <div class="stat hidden" id="time-stat">
+                    <span class="label">剩余时间:</span>
+                    <span id="time">60</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-board">
+            <div id="board"></div>
+        </div>
+        
+        <!-- 道具栏 -->
+        <div class="power-ups-container">
+            <div class="power-up-item" id="power-up-rearrange">
+                <span class="power-up-icon">🔄</span>
+                <span class="power-up-count" id="count-rearrange">3</span>
+                <span class="power-up-name">重排</span>
+            </div>
+            <div class="power-up-item" id="power-up-hint">
+                <span class="power-up-icon">💡</span>
+                <span class="power-up-count" id="count-hint">2</span>
+                <span class="power-up-name">提示</span>
+            </div>
+            <div class="power-up-item" id="power-up-special">
+                <span class="power-up-icon">✨</span>
+                <span class="power-up-count" id="count-special">1</span>
+                <span class="power-up-name">特殊</span>
+            </div>
+            <div class="power-up-item" id="power-up-freeze">
+                <span class="power-up-icon">⏸️</span>
+                <span class="power-up-count" id="count-freeze">1</span>
+                <span class="power-up-name">冻结</span>
+            </div>
+        </div>
+        
+        <div class="game-controls">
+            <button id="restart-btn" class="btn">重新开始</button>
+            <button id="hint-btn" class="btn">提示</button>
+            <button id="back-btn" class="btn">返回菜单</button>
+        </div>
+        
+        <div id="game-over" class="game-over hidden">
+            <div class="game-over-content">
+                <h2>游戏结束</h2>
+                <p>最终分数: <span id="final-score">0</span></p>
+                <p>到达关卡: <span id="final-level">1</span></p>
+                <button id="play-again" class="btn">再玩一次</button>
+                <button id="back-to-menu-btn" class="btn">返回菜单</button>
+            </div>
+        </div>
+        
+        <div id="level-up" class="level-up hidden">
+            <div class="level-up-content">
+                <h2>恭喜！</h2>
+                <p>你已进入第 <span id="new-level">2</span> 关</p>
+                <button id="continue" class="btn">继续</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
